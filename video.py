@@ -1,5 +1,6 @@
-import subprocess
+import os
 import random
+from subprocess import PIPE, Popen, STDOUT
 
 def elegirEpisodio():
     temporada = random.randint(1,11)
@@ -33,6 +34,11 @@ def elegirEpisodio():
 
     nombrearchivo = '~/simpsonstv/videos/encoded/"LOS SIMPSONS.S'+str(temporada)+'.E'+str(episodio)+'.mp4"'
     #print(nombrearchivo)
-    subprocess.call(["omxplayer", "--display 4", nombrearchivo])
-    
+    #subprocess.call(["omxplayer", "--display 4", nombrearchivo])
+    #os.system("omxplayer --display 4 ~/simpsonstv/videos/encoded/'LOS SIMPSONS.S"+str(temporada)+".E"+str(episodio)+".mp4'")
+    playProcess = Popen(['omxplayer', '--no-osd', '--aspect-mode', 'fill', nombrearchivo])
+    playProcess.wait()
+
+#while (True):
+    #elegirEpisodio()
 elegirEpisodio()
